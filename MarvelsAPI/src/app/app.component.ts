@@ -22,10 +22,10 @@ interface DetailedCharacter {
 export class AppComponent implements OnInit{
   title = 'MarvelsAPI';
   characters: Character[] = [];
-  selectedCharacters: Character[] = [];
   searchId: any;
   searchName: any;
-  detailedCharacters: DetailedCharacter[] = [];
+  selectedCharacters: any[] = [];
+  detailedCharacters: any[] = [];
 
   constructor(private marvelService: MarvelService){}
 
@@ -51,11 +51,27 @@ export class AppComponent implements OnInit{
         };
         this.detailedCharacters.push(detailedCharacter);
       });
+      this.updateDetailedCharacters();
     }
   }
 
-  removeFromSelectedCharacters(character: Character): void {
-    this.selectedCharacters = this.selectedCharacters.filter((c) => c.id !== character.id);
+  removeFromSelectedCharacters(character: any) {
+    const index = this.selectedCharacters.indexOf(character);
+    if (index >= 0) {
+      this.selectedCharacters.splice(index, 1);
+      this.updateDetailedCharacters();
+    }
+  }
+
+  updateDetailedCharacters() {
+    this.detailedCharacters = this.selectedCharacters.map(character => {
+      return {
+        id: character.id,
+        name: character.name,
+        image: character.thumbnail.path + '.' + character.thumbnail.extension,
+        comic: character.comics.items.map((item: any) => item.name).join(', ')
+      };
+    });
   }
 
   searchCharacterById(): void {
