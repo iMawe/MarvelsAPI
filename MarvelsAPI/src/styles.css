@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+.marvel-theme {
+    background-color: #ed1d24;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .marvel-title {
+    text-align: center;
+  }
+  
+  .marvel-btn {
+    margin: 0 10px;
+  }
+  
+  .marvel-table {
+    color: #000;
+  }
+  
+  .marvel-row {
+    color: #fff;
+  }
+  
+  .marvel-image {
+    width: 100px;
+    height: 100px;
+  }
+  

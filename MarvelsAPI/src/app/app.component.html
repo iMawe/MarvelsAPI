@@ -1,0 +1,65 @@
+<div class="container mt-4 marvel-theme">
+  <h2 class="marvel-title">Lista de personajes de Marvel:</h2>
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" [(ngModel)]="searchName" placeholder="Buscar por Nombre">
+    <button class="btn btn-primary marvel-btn" (click)="searchCharacterByName()">Buscar</button>
+  </div>
+  <table class="table table-striped marvel-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let character of characters" class="marvel-row">
+        <td>{{ character.id }}</td>
+        <td>{{ character.name }}</td>
+        <td><button class="btn btn-success marvel-btn" (click)="addToSelectedCharacters(character)">Agregar</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container mt-4 marvel-theme" *ngIf="selectedCharacters.length > 0">
+  <h2 class="marvel-title">Personajes seleccionados:</h2>
+  <table class="table table-striped marvel-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let character of selectedCharacters" class="marvel-row">
+        <td>{{ character.id }}</td>
+        <td>{{ character.name }}</td>
+        <td><button class="btn btn-danger marvel-btn" (click)="removeFromSelectedCharacters(character)">Quitar</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container mt-4 marvel-theme" *ngIf="detailedCharacters.length > 0">
+  <h2 class="marvel-title">Información detallada de personajes seleccionados:</h2>
+  <table class="table table-striped marvel-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Imagen</th>
+        <th>Nombre</th>
+        <th>Comic</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let character of detailedCharacters" class="marvel-row">
+        <td>{{ character.id }}</td>
+        <td><img [src]="character.image" alt="{{ character.name }}" class="marvel-image"></td>
+        <td>{{ character.name }}</td>
+        <td>{{ character.comic }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
